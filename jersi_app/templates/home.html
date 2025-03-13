@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Jersi Collection</h1>
+<div class="row">
+    {% for jersi in jersis %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ jersi.image.url }}" class="card-img-top" alt="{{ jersi.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ jersi.name }}</h5>
+                <p class="card-text">${{ jersi.price }}</p>
+                <p class="card-text">Quantity: {{ jersi.quantity }}</p>
+                <a href="{% url 'add_to_cart' jersi.id %}" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

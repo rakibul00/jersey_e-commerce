@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Search Results</h1>
+<div class="row">
+    {% for jersi in jersis %}
+        <div class="col-md-4">
+            <a href="{% url 'jersi_detail' jersi.id %}">{{ jersi.name }}</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
