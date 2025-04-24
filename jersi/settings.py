@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jersi_app',
+    'jersi_app.apps.JersiAppConfig',  # Correct reference to the app
     "crispy_forms",
     "crispy_bootstrap5",
 ]
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
