@@ -1,0 +1,10 @@
+asgiref
+crispy-bootstrap5
+distlib
+Django
+django-crispy-forms
+filelock
+pillow
+platformdirs
+sqlparse
+virtualenv
