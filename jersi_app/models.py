@@ -14,7 +14,7 @@ class Jersi(models.Model):
     detail = models.CharField(max_length=500)
     quantity = models.PositiveIntegerField(default=1)
   
-    image = models.ImageField(upload_to='jersi_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='media/', null=True, blank=True)
 
     def __str__(self):
         return self.name
