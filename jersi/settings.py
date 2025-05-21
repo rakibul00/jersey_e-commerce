@@ -16,8 +16,7 @@ import os
 
 STATIC_URL = '/static/'
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+
 
 
 from pathlib import Path
@@ -43,17 +42,21 @@ LOGIN_URL = '/login/'
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+  
+    'django.contrib.admin',         # ✅ Important: must be present
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jersi_app.apps.JersiAppConfig',  # Correct reference to the app
     "crispy_forms",
     "crispy_bootstrap5",
-]
+    "jersi_app",
 
+    # Your apps below
+    
+]
+  
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
