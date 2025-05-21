@@ -1,6 +1,3 @@
-
-
-
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -27,6 +24,7 @@ def home(request):
 
 
 def add_to_cart(request, jersi_id):
+  categories = Category.objects.all()
   if request.user.is_authenticated:
     jersi = get_object_or_404(Jersi, id=jersi_id)
     cart_item, created = Cart.objects.get_or_create(user=request.user, jersi=jersi)
@@ -36,23 +34,26 @@ def add_to_cart(request, jersi_id):
     return redirect('cart')
   else:
         messages.success(request,'You have create an account and go to cart page')
-        return redirect( 'signin')
+        return redirect( 'signin',{'categories': categories})
          
 
 
 def cart(request):
     if request.user.is_authenticated:
-        
-       tax = 0
-       cart_items = Cart.objects.filter(user=request.user)
-       total_price = sum(item.jersi.price * item.quantity for item in cart_items)
-       tax = (2*total_price)/100 # 2 % vat
-       total_price = total_price + tax
-       return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': total_price,'tax':tax})
-      
+        categories = Category.objects.all()
+        cart_items = Cart.objects.filter(user=request.user).select_related('jersi__category')
+        total_price = sum(item.jersi.price * item.quantity for item in cart_items)
+        tax = (2 * total_price) / 100  # 2% VAT
+        total_price = total_price + tax
+        return render(request, 'cart.html', {
+            'cart_items': cart_items,
+            'total_price': total_price,
+            'tax': tax,
+            'categories': categories,
+        })
     else:
-        messages.success(request,'You have create an account and go to cart page')
-        return redirect( 'signin')
+        messages.success(request, 'You have create an account and go to cart page')
+        return redirect('signin')
          
 
 
@@ -76,7 +77,8 @@ def update_cart(request, cart_item_id, action):
 
 def jersi_dec_view(request, jersi_id):
     jersi = get_object_or_404(Jersi, id=jersi_id)
-    return render(request, 'jersi_dec.html', {'jersi': jersi})
+    categories = Category.objects.all()
+    return render(request, 'jersi_dec.html', {'jersi': jersi, 'categories': categories})
 
 
 
