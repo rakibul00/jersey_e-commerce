@@ -24,17 +24,17 @@ def home(request):
 
 
 def add_to_cart(request, jersi_id):
-  categories = Category.objects.all()
-  if request.user.is_authenticated:
-    jersi = get_object_or_404(Jersi, id=jersi_id)
-    cart_item, created = Cart.objects.get_or_create(user=request.user, jersi=jersi)
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return redirect('cart')
-  else:
-        messages.success(request,'You have create an account and go to cart page')
-        return redirect( 'signin',{'categories': categories})
+    categories = Category.objects.all()
+    if request.user.is_authenticated:
+        jersi = get_object_or_404(Jersi, id=jersi_id)
+        cart_item, created = Cart.objects.get_or_create(user=request.user, jersi=jersi)
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
+        return redirect('cart')
+    else:
+        messages.success(request, 'You have create an account and go to cart page')
+        return redirect('signin')  # Removed extra argument, just redirect to 'signin'
          
 
 

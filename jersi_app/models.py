@@ -46,3 +46,8 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.address_line_1}, {self.city}, {self.state}, {self.country}"
+    
+    
+class PaymentGateWaySettings(models.Model):
+    store_id = models.CharField(max_length=500, blank=True, null=True)
+    store_pass = models.CharField(max_length=500, blank=True, null = True)

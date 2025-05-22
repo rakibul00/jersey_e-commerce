@@ -23,7 +23,12 @@
                   <td>
                     <figure class="itemside align-items-center">
                       <div class="aside">
-                        <img src="{{ item.jersi.image.url }}" class="img-fluid img-sm" style="max-width:60px; max-height:60px;">
+                        <img 
+                          src="{{ item.jersi.image.url }}" 
+                          class="img-fluid img-sm d-block w-100"
+                          style="max-width:60px; max-height:60px; width:60px; height:60px; object-fit:cover;"
+                          alt="{{ item.jersi.name }}"
+                        >
                       </div>
                       <figcaption class="info">
                         <p class="mb-0">{{ item.jersi.name }}</p>
